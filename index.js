@@ -15,22 +15,34 @@ const monsterRoutes = require("./routes/monster_routes");
 app.use(express.json()); // Habilito recepción de JSON en servidor
 
 
-
 const userRoutes = require("./routes/users_routes");
 app.use(express.json());
-// PONER DOCUMENTACIÓN SWAGGER O JSDOC!!!
 
 
+const favRoutes = require("./routes/fav_routes");
+app.use(express.json());
+
+
+//DOCUMENTACIÓN SWAGGER
+
+//USERS
 app.use("/api/users", userRoutes)
 app.get("/",(req,res)=>{
   res.send("Hello Hunter!")
 })
 
-
+//MONSTERS
 app.use("/api/monsters",monsterRoutes)
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+//FAVORITES
+app.use("/api/favs",favRoutes)
+app.get("/",(req,res)=>{
+  res.send("Hello FavsList!")
+})
+
 
 app.use("*", error404);
 
