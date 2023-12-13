@@ -1,0 +1,30 @@
+[
+    {
+        "id":1,
+        "name":"Pablo",
+        "img":"",
+        "email":"pablo@hotmail.com",
+        "password":"soypablo"
+    },
+    {
+        "id":1,
+        "name":"Mario",
+        "img":"",
+        "email":"mario@hotmail.com",
+        "password":"soymario"
+    },
+    {
+        "id":1,
+        "name":"David",
+        "img":"",
+        "email":"david@hotmail.com",
+        "password":"soydavid"
+    },
+    {
+        "id":1,
+        "name":"Carlos",
+        "img":"",
+        "email":"carlos@hotmail.com",
+        "password":"soycarlos"
+    }
+]

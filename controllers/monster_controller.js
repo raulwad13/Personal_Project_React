@@ -28,7 +28,6 @@ const createMonsters = async (req, res) => {
 const getMonster = async (req, res) => {
   try {
     const monster = await MonsterModel.find({})
-      // .populate("monsters", "-_id -__v")
       .select("-_id -__v");
     res.status(200).json(monster);
   } catch (error) {
@@ -48,7 +47,7 @@ const editMonster = async (req, res) => {
     );
     if (!monster) {
       return res.status(404).json({
-        message: `No se encontró el monstruo con el nombre ${req.body.name}`,
+        message: `Don't found the monster ${req.body.name}`,
       });
     }
 
