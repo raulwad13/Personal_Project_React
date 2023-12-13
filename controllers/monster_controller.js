@@ -27,8 +27,7 @@ const createMonsters = async (req, res) => {
 
 const getMonster = async (req, res) => {
   try {
-    const monster = await MonsterModel.find({})
-      .select("-_id -__v");
+    const monster = await MonsterModel.find({}).select("-_id -__v");
     res.status(200).json(monster);
   } catch (error) {
     console.log(`ERROR: ${error.stack}`);

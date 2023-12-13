@@ -10,7 +10,7 @@ const userSchema ={
     pasword:String,
 };
 
-const TableUserSchema = mongoose.Schema("usuarios", userSchema);
+const TableUserSchema = mongoose.Schema(userSchema);
 
 const User = mongoose.model("usuarios",TableUserSchema);
 

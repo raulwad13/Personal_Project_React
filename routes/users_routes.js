@@ -1,3 +1,4 @@
+const userController= require("../controllers/users_controller")
 const userRouter = require("express").Router();
 
 
@@ -14,9 +15,9 @@ userRouter.get("/", userController.getUsers);
 userRouter.put("/", userController.editUsers);
 
 // DELETE
-userRouter.delete("/", userController.deleteUsers);
+userRouter.delete("/", userController.deleteUser);
 
-userRouter.delete("/all", userController.deleteUserss);
+userRouter.delete("/all", userController.deleteUsers);
 
 
 

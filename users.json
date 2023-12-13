@@ -2,28 +2,28 @@
     {
         "id":1,
         "name":"Pablo",
-        "img":"",
+        "url":"",
         "email":"pablo@hotmail.com",
         "password":"soypablo"
     },
     {
-        "id":1,
+        "id":2,
         "name":"Mario",
-        "img":"",
+        "url":"",
         "email":"mario@hotmail.com",
         "password":"soymario"
     },
     {
-        "id":1,
+        "id":3,
         "name":"David",
-        "img":"",
+        "url":"",
         "email":"david@hotmail.com",
         "password":"soydavid"
     },
     {
-        "id":1,
+        "id":4,
         "name":"Carlos",
-        "img":"",
+        "url":"",
         "email":"carlos@hotmail.com",
         "password":"soycarlos"
     }

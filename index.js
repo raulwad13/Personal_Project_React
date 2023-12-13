@@ -14,7 +14,17 @@ app.use(express.urlencoded({ extended: true }));
 const monsterRoutes = require("./routes/monster_routes");
 app.use(express.json()); // Habilito recepción de JSON en servidor
 
+
+
+const userRoutes = require("./routes/users_routes");
+app.use(express.json());
 // PONER DOCUMENTACIÓN SWAGGER O JSDOC!!!
+
+
+app.use("/api/users", userRoutes)
+app.get("/",(req,res)=>{
+  res.send("Hello Hunter!")
+})
 
 
 app.use("/api/monsters",monsterRoutes)
