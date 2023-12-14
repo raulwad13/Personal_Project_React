@@ -18,7 +18,7 @@ app.use(express.json()); // Habilito recepción de JSON en servidor
 const userRoutes = require("./routes/users_routes");
 app.use(express.json());
 
-
+ 
 const favRoutes = require("./routes/fav_routes");
 app.use(express.json());
 

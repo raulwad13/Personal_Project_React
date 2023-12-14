@@ -3,10 +3,22 @@ require("../config/db_mongo");
 
 // Crear schema
 const monsterSchema = {
-  name: String,
-  type: String,
-  species: String,
-  locations: Array,
+  name: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  species: {
+    type: String,
+    required: true,
+  },
+  locations: {
+    type: Array,
+    required: true,
+  }
 };
 
 // Create schema
