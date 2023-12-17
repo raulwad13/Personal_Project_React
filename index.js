@@ -2,6 +2,8 @@ const express = require("express");
 require("dotenv").config();
 const cowsay = require("cowsay");
 const error404 = require("./middleware/error404")
+// const path = require("path")
+
 
 const app = express();
 const port = 3000;
@@ -10,7 +12,10 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Recepción Client
+// app.use(express.static(path.join(__dirname,"client/build")))
 // Rutes
+
 const monsterRoutes = require("./routes/monster_routes");
 app.use(express.json()); // Habilito recepción de JSON en servidor
 
@@ -22,26 +27,24 @@ app.use(express.json());
 const favRoutes = require("./routes/fav_routes");
 app.use(express.json());
 
-
 //DOCUMENTACIÓN SWAGGER
+
+
+// Get client
+// app.get("*", (req,res)=>{res.sendFile(path.join(__dirname+"/client/build/index.html"))})
+
 
 //USERS
 app.use("/api/users", userRoutes)
-app.get("/",(req,res)=>{
-  res.send("Hello Hunter!")
-})
+
 
 //MONSTERS
 app.use("/api/monsters",monsterRoutes)
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
 
 //FAVORITES
 app.use("/api/favs",favRoutes)
-app.get("/",(req,res)=>{
-  res.send("Hello FavsList!")
-})
+
 
 
 app.use("*", error404);
