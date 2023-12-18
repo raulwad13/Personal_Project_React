@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import BiomaCard from "../BiomaDetails/BiomaCard/BiomaCard";
 import BiomaDetail from "../BiomaDetails/BiomaDetails";
+import MonsterList from "../BiomaDetails/MonsterList";
 
 const BiomaList = () => {
   const [biomas, setBiomas] = useState([]);
@@ -35,7 +35,7 @@ const BiomaList = () => {
       {selectedBioma ? (
         <div>
           <BiomaDetail bioma={selectedBioma} />
-          <BiomaCard bioma={selectedBioma} />
+          <MonsterList bioma={selectedBioma} />
         </div>
       ) : (
         <div>{paintBioma()}</div>

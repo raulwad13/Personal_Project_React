@@ -1,0 +1,25 @@
+.monster-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .MonsterImage {
+    width: 100%; 
+    border-radius: 8px; 
+    margin-bottom: 10px;
+  }
+  
+  .monster-card p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+  

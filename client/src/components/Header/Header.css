@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'MonsterHunter';  
-  src: url('../../assets/mhfont.png') format('png'); 
+  src: url("client/public/assets/monsterhunterfont.TTF") format('png'); 
 }
 
 
@@ -13,6 +13,7 @@ header {
   color: #fff;
   font-size:xx-large;
   font-family: "mhfont.png", sans-serif;
+  min-height: 15vh;
 }
 
 .menu-icon {
@@ -38,11 +39,10 @@ a:hover {
 }
 
 .user-photo {
-  width: 50px; 
-  height: 50px; 
+  width: 120px; 
+  height: 120px; 
   border-radius: 50%; 
   object-fit: cover; 
-  margin-right: 10px;
 }
 
 /* Estilo para el fondo del menú hamburguesa */
@@ -52,7 +52,6 @@ a:hover {
 }
 
 .bm-menu {
-  background-color: grey;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }

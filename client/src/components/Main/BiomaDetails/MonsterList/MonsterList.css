@@ -1,4 +1,4 @@
-/* 
+
 
 .bioma-details {
   display: flex;
@@ -18,8 +18,10 @@
   margin-bottom: 10px; 
 }
 
+
+
 .bioma-details h2 {
   margin: 0;
   font-size: 18px;
   color: #333;
-} */
+}

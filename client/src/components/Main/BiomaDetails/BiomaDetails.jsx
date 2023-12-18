@@ -1,15 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../BiomaDetails/BiomaDetails.css"
+import MonsterList from "./MonsterList";
+import { BiomaContext } from "../../../context/BiomaContext";
 
 
-const BiomaDetail = ({ bioma }) => {
+const BiomaDetails = () => {
+  const { bioma, updateBioma } = useContext(BiomaContext)
+
   return (
-    <div className="bioma-details">
-      <h2>{bioma.name}</h2>
-      {/* <p>{bioma.camps}</p> */}
-    </div>
+    <>
+    {/* <article className="bioma-details">
+      <MonsterList bioma={bioma}/>
+    </article> */}
+    </>
   );
 };
 
-export default BiomaDetail;
+export default BiomaDetails;
 

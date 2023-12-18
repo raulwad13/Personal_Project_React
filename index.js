@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const cors=require("cors")
 const cowsay = require("cowsay");
 const error404 = require("./middleware/error404")
 // const path = require("path")
@@ -8,10 +9,17 @@ const error404 = require("./middleware/error404")
 const app = express();
 const port = 3000;
 
+
+
+
 //habilita recepción objetos
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+
+app.use(cors());
+app.options("*",cors())
 // Recepción Client
 // app.use(express.static(path.join(__dirname,"client/build")))
 // Rutes

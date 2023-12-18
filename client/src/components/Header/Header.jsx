@@ -7,8 +7,8 @@ class Header extends React.Component {
     menuOpen: false,
   };
 
-  handleMenuOpen = () => {
-    this.setState({ menuOpen: true });
+  handleMenuToggle = () => {
+    this.setState((prevState) => ({ menuOpen: !prevState.menuOpen }));
   };
 
   handleMenuClose = () => {
@@ -24,16 +24,28 @@ class Header extends React.Component {
             src="https://cdn-icons-png.flaticon.com/512/5895/5895397.png"
             alt="Menu"
             className="menu-icon"
-            onClick={this.handleMenuOpen}
+            onClick={this.handleMenuToggle}
           />
         </header>
-        <Menu isOpen={this.state.menuOpen} onClose={this.handleMenuClose} rigth>
-          
-          <img src="https://static.zerochan.net/Palico.full.2260499.png" alt="photo" className="user-photo"/>
-          <a id="home" className="menu-item" href="/">
+        {/* <Menu
+          isOpen={this.state.menuOpen}
+          onClose={this.handleMenuClose}
+          right
+        >
+          <img
+            src="../../../public/assets/Palico.png"
+            alt="photo"
+            className="user-photo"
+          />
+          <a
+            id="home"
+            className="menu-item"
+            href="/"
+            onClick={this.handleMenuClose}
+          >
             Home
           </a>
-        </Menu>
+        </Menu> */}
       </>
     );
   }
