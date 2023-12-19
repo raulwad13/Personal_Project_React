@@ -1,4 +1,4 @@
-# Monster Hunter Filter Web App
+# Monster Hunter Maps
 
 [https://ejemplo.com/ruta/a/imagen-monster-hunter.jpg](https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/02/Monster-Hunter-header-image.jpg)
 
