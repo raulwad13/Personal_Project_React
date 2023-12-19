@@ -1,6 +1,6 @@
 # Monster Hunter Maps
 
-(https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/02/Monster-Hunter-header-image.jpg)
+![image](https://github.com/raulwad13/Personal_Project_React/assets/145336326/a9bf2fcc-c8b9-44ff-9d02-4994d9920d0e)
 
 Este proyecto es el trabajo final del bootcamp de Desarrollo Web Fullstack creado por Raul. La aplicación es una plataforma fullstack con un backend construido en Express y MongoDB para la gestión de elementos relacionados con los monstruos del videojuego Monster Hunter. El frontend está desarrollado en React utilizando Vite como entorno de desarrollo.
 
