@@ -7,26 +7,41 @@ import { Vortex } from "react-loader-spinner";
 
 const MonsterList = ({ bioma }) => {
   const [monsters, setMonsters] = useState([]);
+  const [sortedMonsters, setSortedMonsters] = useState([]);
+  const [isAscending, setIsAscending] = useState(true);
 
   useEffect(() => {
     const fetchMonsters = async () => {
       const response = await axios.get(`http://localhost:3000/api/monsters`);
-      console.log(response);
       setMonsters(response.data);
 
-      let monsters = response.data;
-
-      let res = monsters.filter((monster) =>
+      let filteredMonsters = response.data.filter((monster) =>
         monster.locations.some((location) => location.name === bioma.name)
       );
-      console.log(res);
+      setSortedMonsters(filteredMonsters);
     };
 
     fetchMonsters();
-  }, []);
+  }, [bioma.name]);
+
+  const sortAlphabetically = () => {
+    const sorted = [...sortedMonsters].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setSortedMonsters(sorted);
+    setIsAscending(true);
+  };
+
+  const sortReverseAlphabetically = () => {
+    const sorted = [...sortedMonsters].sort((a, b) =>
+      b.name.localeCompare(a.name)
+    );
+    setSortedMonsters(sorted);
+    setIsAscending(false);
+  };
 
   const paintMonster = () => {
-    return monsters.map((monster) => (
+    return sortedMonsters.map((monster) => (
       <CardMonster key={uuidv4()} monster={monster} />
     ));
   };
@@ -34,6 +49,10 @@ const MonsterList = ({ bioma }) => {
   return (
     <div className="monster-card">
       <h3>Monsters in {bioma.name}</h3>
+      <div>
+        <button onClick={sortAlphabetically}>Sort A-Z</button>
+        <button onClick={sortReverseAlphabetically}>Sort Z-A</button>
+      </div>
       <div>{monsters ? paintMonster() : null}</div>
     </div>
   );

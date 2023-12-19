@@ -2,3 +2,23 @@ url{
     width: 100%;
     height: 100%;
 }
+
+/* GlobalMap.css */
+
+.map-container {
+    width: 100%;
+  }
+  
+  .map-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Media Query para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .map-container img {
+      width: 80%; /* Ajusta según tus necesidades */
+    }
+  }
+  
