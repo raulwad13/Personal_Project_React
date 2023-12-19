@@ -1,6 +1,6 @@
 # Monster Hunter Filter Web App
 
-[https://ejemplo.com/ruta/a/imagen-monster-hunter.jpg](https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/02/Monster-Hunter-header-image.jpg))
+[https://ejemplo.com/ruta/a/imagen-monster-hunter.jpg](https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/02/Monster-Hunter-header-image.jpg)
 
 Este proyecto es el trabajo final del bootcamp de Desarrollo Web Fullstack creado por Raul. La aplicación es una plataforma fullstack con un backend construido en Express y MongoDB para la gestión de elementos relacionados con los monstruos del videojuego Monster Hunter. El frontend está desarrollado en React utilizando Vite como entorno de desarrollo.
 
