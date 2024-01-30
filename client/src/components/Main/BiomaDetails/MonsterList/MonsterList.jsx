@@ -3,7 +3,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import CardMonster from "./CardMonster";
 import "./MonsterList.css";
-import { Vortex } from "react-loader-spinner";
+// import { Vortex } from "react-loader-spinner";
 
 const MonsterList = ({ bioma }) => {
   const [monsters, setMonsters] = useState([]);

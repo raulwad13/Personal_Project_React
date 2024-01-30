@@ -1,18 +1,43 @@
-import React, {useContext} from "react";
-import "../BiomaDetails/BiomaDetails.css"
-import MonsterList from "./MonsterList";
-import { BiomaContext } from "../../../context/BiomaContext";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import MonsterList from "../BiomaDetails/MonsterList";
 
 const BiomaDetails = () => {
-  const { bioma, updateBioma } = useContext(BiomaContext)
+  const [biomas, setBiomas] = useState([]);
+  const [selectedBioma, setSelectedBioma] = useState(null);
+
+  useEffect(() => {
+    const getBiomas = async () => {
+      const response = await axios.get("https://mhw-db.com/locations");
+      setBiomas(response.data.slice(0, 5));
+    };
+
+    getBiomas();
+  }, []);
+
+  const handleBiomaClick = (bioma) => {
+    setSelectedBioma(bioma);
+  };
+
+  const paintBioma = () => {
+    return biomas.map((bioma) => (
+      <button key={uuidv4()} onClick={() => handleBiomaClick(bioma)}>
+        {bioma.name}
+      </button>
+    ));
+  };
 
   return (
-    <>
-    {/* <article className="bioma-details">
-      <MonsterList bioma={bioma}/>
-    </article> */}
-    </>
+    <section>
+      {selectedBioma ? (
+        <div>
+          <MonsterList bioma={selectedBioma} />
+        </div>
+      ) : (
+        <div>{paintBioma()}</div>
+      )}
+    </section>
   );
 };
 
