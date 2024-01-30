@@ -1,29 +1,16 @@
-import React, { useState, useContext } from "react";
+import { useState } from "react";
 import "./App.css";
-import Main from "./components/Main/Main";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-// import { ChakraProvider } from "@chakra-ui/react";
-import { BiomaContext } from "./context/BiomaContext";
 
 function App() {
-  const [bioma, setBioma] = useState("");
-  const updateBioma = (newBioma) => {
-    setBioma(newBioma);
-  };
-  const biomaData = {
-    bioma,
-    updateBioma,
-  };
+  const [count, setCount] = useState(0);
+
   return (
     <>
-      <section>
-        <BiomaContext.Provider value={biomaData}>
-            <Header />
-            <Main />
-            <Footer />
-        </BiomaContext.Provider>
-      </section>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+      </div>
     </>
   );
 }

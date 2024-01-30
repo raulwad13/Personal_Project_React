@@ -1,10 +1,7 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
 #root {
-  min-width: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
 }
 
@@ -14,11 +11,9 @@ html, body {
   will-change: filter;
   transition: filter 300ms;
 }
-
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -44,15 +39,4 @@ html, body {
 
 .read-the-docs {
   color: #888;
-}
-
-/* Media Query para pantallas más pequeñas */
-@media (max-width: 768px) {
-  .logo {
-    height: 4em;
-  }
-
-  .card {
-    padding: 1em;
-  }
 }
