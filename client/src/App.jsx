@@ -1,17 +1,86 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
+// Cada botón representa un bioma del mapa original.
+const biomas = ["Ancient Forest", "Wildspire Waste", "Coral Highlands", "Rotten Vale", "Elder's Recess"];
+const API = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [monstruos, setMonstruos] = useState([]);
+  const [bioma, setBioma] = useState(null);
+  const [seleccionado, setSeleccionado] = useState(null);
+  const [error, setError] = useState("");
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    fetch(API + "/monsters")
+      .then((respuesta) => {
+        if (!respuesta.ok) throw new Error("No se pudieron cargar los monstruos");
+        return respuesta.json();
+      })
+      .then((datos) => setMonstruos(Array.isArray(datos) ? datos : []))
+      .catch(() => setError("No se ha podido conectar con la API. Comprueba que Express y MongoDB están funcionando."))
+      .finally(() => setCargando(false));
+  }, []);
+
+  const disponibles = monstruos.filter((monstruo) =>
+    Array.isArray(monstruo.locations) &&
+    monstruo.locations.some((lugar) => lugar.name === bioma)
+  );
 
   return (
-    <>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+    <div className="app">
+      <header className="cabecera">
+        <h1>Monster Hunter Maps</h1>
+        <p>Selecciona una región y descubre sus monstruos.</p>
+      </header>
+
+      {seleccionado ? (
+        <section className="panel">
+          <button onClick={() => setSeleccionado(null)}>← Volver a {bioma}</button>
+          <h2>{seleccionado.name}</h2>
+          <p><strong>Especie:</strong> {seleccionado.species || "Desconocida"}</p>
+          <p><strong>Tipo:</strong> {seleccionado.type || "Desconocido"}</p>
+          <p>{seleccionado.description || "Sin descripción disponible."}</p>
+          <h3>Hábitats</h3>
+          <p>{seleccionado.locations?.map((lugar) => lugar.name).join(", ") || "Sin datos"}</p>
+          <h3>Debilidades</h3>
+          <p>{seleccionado.weaknesses?.map((debilidad) => debilidad.element).join(", ") || "Sin datos"}</p>
+        </section>
+      ) : (
+        <>
+          <section className="panel">
+            <h2>Mapa de biomas</h2>
+            <div className="mapa" aria-label="Seleccionar bioma">
+              {biomas.map((nombre) => (
+                <button key={nombre} className={bioma === nombre ? "bioma activo" : "bioma"}
+                  onClick={() => setBioma(nombre)} aria-pressed={bioma === nombre}>
+                  {nombre}
+                </button>
+              ))}
+            </div>
+          </section>
+          {bioma && (
+            <section className="panel">
+              <h2>Monstruos de {bioma}</h2>
+              {cargando && <p>Cargando monstruos...</p>}
+              {error && <p role="alert">{error}</p>}
+              {!cargando && !error && disponibles.length === 0 && <p>No hay monstruos disponibles en este bioma.</p>}
+              <div className="monstruos">
+                {disponibles.map((monstruo) => (
+                  <button key={monstruo.name} className="monstruo" onClick={() => setSeleccionado(monstruo)}>
+                    <strong>{monstruo.name}</strong>
+                    <span>{monstruo.species}</span>
+                    <small>Ver ficha →</small>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+        </>
+      )}
+      <footer>Proyecto educativo · Monster Hunter Maps</footer>
+    </div>
   );
 }
 
