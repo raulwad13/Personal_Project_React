@@ -1,8 +1,15 @@
-# React + Vite
+# Monster Hunter Maps — frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interfaz React + Vite del mapa interactivo de biomas.
 
-Currently, two official plugins are available:
+## Ejecutar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Arranca el backend Express y MongoDB desde la raíz del repositorio: `npm start`.
+2. En otra terminal, ejecuta `cd client && npm install && npm run dev`.
+3. Abre la dirección que indique Vite (habitualmente `http://localhost:5173`).
+
+Por defecto React consulta `http://localhost:3000/api/monsters`. Para cambiarlo, crea `client/.env` con `VITE_API_URL=https://tu-servidor/api`.
+
+**Recorrido:** seleccionar bioma → elegir monstruo → consultar ficha → volver al mapa.
+
+Si la base de datos está vacía, hay que cargar los datos de `monsters.json` mediante el endpoint `POST /api/monsters/seed` una sola vez en un entorno local de confianza. No expongas ese endpoint públicamente sin protección.
