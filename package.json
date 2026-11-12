@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "npm start --prefix client",
-    "server": "nodemon index.js",
+    "client": "npm run dev --prefix client",
+    "server": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
+    "start": "node index.js"
   },
   "author": "RAul",
   "license": "ISC",
