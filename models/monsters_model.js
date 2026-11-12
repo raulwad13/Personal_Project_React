@@ -18,7 +18,14 @@ const monsterSchema = {
   locations: {
     type: Array,
     required: true,
-  }
+  },
+  // Estos campos aparecen en las fichas del frontend.
+  description: { type: String, default: "" },
+  weaknesses: { type: Array, default: [] },
+  elements: { type: Array, default: [] },
+  ailments: { type: Array, default: [] },
+  resistances: { type: Array, default: [] },
+  rewards: { type: Array, default: [] }
 };
 
 // Create schema
