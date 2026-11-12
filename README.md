@@ -18,7 +18,7 @@ La aplicación permite filtrar y organizar monstruos del juego Monster Hunter se
   - React: Biblioteca de JavaScript para construir interfaces de usuario.
   - Vite: Entorno de desarrollo rápido para aplicaciones web React.
 
-## Configuración del Proyecto
+> **Estado:** proyecto educativo en revisión. Las operaciones de creación, edición y eliminación de monstruos están documentadas como funciones del backend; no se han verificado como opciones disponibles en el frontend.\n\n## Configuración del Proyecto
 
 ### Requisitos Previos
 
@@ -38,14 +38,13 @@ Asegúrese de tener instalados los siguientes elementos:
 2. **Configuración del Backend:**
 
     ```bash
-    cd ..
+    cd Personal_Project_React
     npm install
     ```
 
     Configurar las variables de entorno en el archivo `.env`:
 
     ```env
-    PORT=3001
     MONGODB_URI=mongodb://localhost:27017/monsters
     ```
 
@@ -59,7 +58,7 @@ Asegúrese de tener instalados los siguientes elementos:
     Configurar las variables de entorno en el archivo `.env`:
 
     ```env
-    REACT_APP_API_URL=http://localhost:3001/api
+    VITE_API_URL=http://localhost:3000/api
     ```
 
 4. **Iniciar la Aplicación:**
@@ -67,18 +66,17 @@ Asegúrese de tener instalados los siguientes elementos:
     - Iniciar el backend:
 
         ```bash
-        cd ..
-        npm start
+        npm run server
         ```
 
     - Iniciar el frontend:
 
         ```bash
         cd client
-        npm start
+        npm run dev
         ```
 
-    La aplicación estará disponible en `http://localhost:3000`.
+    La aplicación estará disponible en `http://localhost:5173` (frontend Vite); el backend escucha en `http://localhost:3000`.
 
 ## Funcionalidades Principales
 
@@ -93,12 +91,11 @@ Asegúrese de tener instalados los siguientes elementos:
 
 4. **Eliminación de Monstruos:**
    - Se proporciona una función para eliminar monstruos de la base de datos.
-   - 
-+Estos tres últimos puntos por ahora desde Back exclusivamente
+\n**Nota:** crear, editar y eliminar monstruos se plantearon inicialmente desde el backend.
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si desea mejorar esta aplicación, abra un problema o envíe una solicitud de extracción.
 
 ## Licencia
 
-Este proyecto está bajo la licencia [MIT](LICENSE).
+El archivo `package.json` indica licencia ISC. Comprueba las condiciones de reutilización antes de distribuir el proyecto.
