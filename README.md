@@ -2,18 +2,18 @@
 
 [**🎮 Abrir demo pública**](https://raulwad13.github.io/Personal_Project_React/)
 
-> **Publicación en preparación:** la demo de GitHub Pages utiliza un catálogo local de 58 monstruos y no necesita MongoDB. El despliegue automático se ha configurado, pero su disponibilidad pública debe verificarse.
+> **Demo publicada en GitHub Pages:** consulta un catálogo de 58 monstruos sin instalar nada ni conectar MongoDB. La publicación se automatiza con GitHub Actions.
 
 Proyecto fullstack de exploración de biomas y consulta de monstruos de Monster Hunter, desarrollado como trabajo final de bootcamp.
 
 ## Cómo funciona
 
-1. Selecciona un bioma en el mapa de botones.
+1. Selecciona un bioma en la galería de mapas ilustrados.
 2. Consulta los monstruos que viven allí y utiliza el buscador para filtrarlos por nombre.
-3. Pulsa sobre un monstruo para ver su ficha: especie, tipo, descripción, hábitats y debilidades.
-4. Vuelve al bioma para seguir explorando.
+3. Pulsa sobre un monstruo para ver su ficha con imagen, especie, tipo, descripción, hábitats y debilidades elementales con estrellas.
+4. Vuelve al listado de monstruos o cambia de región con los controles de navegación móvil.
 
-**Estado:** frontend React con demo estática preparada para GitHub Pages y catálogo local de 58 monstruos. La integración con Express y MongoDB sigue disponible para desarrollo. Falta verificar el despliegue público y el recorrido completo desde móvil. El mapa actual usa botones; no es todavía un mapa ilustrado con zonas clicables.
+**Estado:** demo React publicada en GitHub Pages, con mapas ilustrados, imágenes de monstruos, búsqueda, fichas de debilidades y navegación adaptada a móvil. La integración con Express y MongoDB sigue disponible para desarrollo. La demo pública es de consulta y utiliza datos locales; el mapa es una galería visual de regiones, no un mapa geográfico interactivo.
 
 ## Tecnologías
 
