@@ -58,7 +58,7 @@ VITE_API_URL=http://localhost:3000/api
 
 ### Cargar los monstruos
 
-Si quieres guardar los monstruos en MongoDB, con el backend y MongoDB iniciados puedes enviar una petición **POST** a `http://localhost:3000/api/monsters/seed` para cargar los datos de `monsters.json`. Hazlo una sola vez en local: repetirla puede crear duplicados. **No expongas el endpoint de carga de datos en una API pública sin protegerlo.**
+Si quieres guardar los monstruos en MongoDB, con el backend y MongoDB iniciados puedes enviar una petición **POST** a `http://localhost:3000/api/monsters/seed` para cargar los datos de `monsters.json`. Hazlo una sola vez en local: si la colección ya contiene monstruos, la API devuelve un error `409` para evitar duplicados. La ruta está desactivada cuando `NODE_ENV=production`.
 
 ## API existente
 
@@ -67,7 +67,7 @@ Si quieres guardar los monstruos en MongoDB, con el backend y MongoDB iniciados 
 - `PUT /api/monsters`: edita un monstruo.
 - `DELETE /api/monsters`: elimina un monstruo.
 
-Las operaciones de creación, edición y eliminación pertenecen al backend; no hay formularios de administración en el frontend actual.
+Las operaciones de creación, edición y eliminación pertenecen al backend; no hay formularios de administración en el frontend actual. **Todas las rutas de escritura devuelven `403` cuando `NODE_ENV=production`**, porque todavía no hay autenticación. Para desplegar la enciclopedia públicamente, configura esa variable en el servidor. En desarrollo, no expongas el backend sin protección a Internet.
 
 ## Próximos pasos
 
