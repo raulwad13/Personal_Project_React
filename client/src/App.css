@@ -29,3 +29,15 @@
 @media(max-width:600px){.mapa{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:10px}.bioma{min-height:155px}.bioma-info{padding:25px 9px 10px}.bioma-info strong{font-size:.9rem}.mapa-seleccionado{max-height:210px}}
 @media(max-width:380px){.mapa{grid-template-columns:1fr}.bioma{min-height:170px}}
 @media(prefers-reduced-motion:reduce){.bioma,.bioma-imagen{transition:none}}
+
+/* Fichas de monstruos: debilidades legibles y táctiles. */
+.volver-ficha{display:inline-flex;align-items:center;padding:11px 16px;margin-bottom:12px;border:1px solid #8fa68d;border-radius:10px;background:#e9f1e6;color:#23402c;font-weight:700}
+.volver-ficha:hover{background:#d9e9d5}
+.volver-ficha:focus-visible{outline:3px solid #d59b35;outline-offset:3px}
+.debilidades{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0 22px}
+.debilidad{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #d4dfd1;border-radius:12px;background:#f4f8f0}
+.elemento-icono{display:grid;place-items:center;flex:0 0 43px;height:43px;border-radius:10px;background:#e3eade;font-size:1.55rem}
+.debilidad-detalle{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px;color:#243c2b}
+.debilidad-detalle small{color:#536753;overflow-wrap:anywhere}
+.estrellas{font-size:1.25rem;letter-spacing:1px;color:#a56b13;white-space:nowrap}
+@media(max-width:600px){.debilidades{grid-template-columns:1fr}.debilidad{padding:10px}.estrellas{font-size:1.2rem}}
