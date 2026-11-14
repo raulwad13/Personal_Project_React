@@ -1,101 +1,79 @@
-# Monster Hunter Maps
+# Monster Hunter Maps 🗺️
 
-![image](https://github.com/raulwad13/Personal_Project_React/assets/145336326/a9bf2fcc-c8b9-44ff-9d02-4994d9920d0e)
+Proyecto fullstack de exploración de biomas y consulta de monstruos de Monster Hunter, desarrollado como trabajo final de bootcamp.
 
-Este proyecto es el trabajo final del bootcamp de Desarrollo Web Fullstack creado por Raul. La aplicación es una plataforma fullstack con un backend construido en Express y MongoDB para la gestión de elementos relacionados con los monstruos del videojuego Monster Hunter. El frontend está desarrollado en React utilizando Vite como entorno de desarrollo.
+## Cómo funciona
 
-## Descripción
+1. Selecciona un bioma en el mapa de botones.
+2. Consulta los monstruos que viven allí.
+3. Pulsa sobre un monstruo para ver su ficha: especie, tipo, descripción, hábitats y debilidades.
+4. Vuelve al bioma para seguir explorando.
 
-La aplicación permite filtrar y organizar monstruos del juego Monster Hunter según su bioma. Los usuarios pueden realizar operaciones como la creación, edición, eliminación y visualización de los monstruos.
+**Estado:** primera interfaz React implementada y conectada por código a Express. Falta comprobar el funcionamiento completo con MongoDB. El mapa actual usa botones; no es todavía un mapa ilustrado con zonas clicables.
 
-## Tecnologías Utilizadas
+## Tecnologías
 
-- **Backend:**
-  - Express: Framework de servidor web para Node.js que facilita la creación de API REST.
-  - MongoDB: Base de datos NoSQL utilizada para almacenar la información de los monstruos.
+- React y Vite: interfaz.
+- Node.js y Express: API REST.
+- MongoDB y Mongoose: datos de los monstruos.
 
-- **Frontend:**
-  - React: Biblioteca de JavaScript para construir interfaces de usuario.
-  - Vite: Entorno de desarrollo rápido para aplicaciones web React.
+## Ejecutar en local
 
-> **Estado:** proyecto educativo en revisión. Las operaciones de creación, edición y eliminación de monstruos están documentadas como funciones del backend; no se han verificado como opciones disponibles en el frontend.\n\n## Configuración del Proyecto
+Requisitos: Node.js, npm y MongoDB en funcionamiento.
 
-### Requisitos Previos
+```bash
+git clone https://github.com/raulwad13/Personal_Project_React.git
+cd Personal_Project_React
+npm install
+```
 
-Asegúrese de tener instalados los siguientes elementos:
+Crea un archivo `.env` en la raíz, si necesitas configurar la conexión:
 
-- Node.js y npm
-- MongoDB
+```env
+MONGODB_URI=mongodb://localhost:27017/monsters
+PORT=3000
+```
 
-### Pasos de Configuración
+Inicia el backend en una terminal:
 
-1. **Clonar el Repositorio:**
+```bash
+npm start
+```
 
-    ```bash
-    git clone https://github.com/raulwad13/Personal_Project_React.git
-       ```
+En otra terminal, desde la raíz:
 
-2. **Configuración del Backend:**
+```bash
+cd client
+npm install
+npm run dev
+```
 
-    ```bash
-    cd Personal_Project_React
-    npm install
-    ```
+Abre la dirección que indique Vite (habitualmente `http://localhost:5173`).
 
-    Configurar las variables de entorno en el archivo `.env`:
+La interfaz consulta por defecto `http://localhost:3000/api/monsters`. Puedes cambiar la dirección creando `client/.env`:
 
-    ```env
-    MONGODB_URI=mongodb://localhost:27017/monsters
-    ```
+```env
+VITE_API_URL=http://localhost:3000/api
+```
 
-3. **Configuración del Frontend:**
+### Cargar los monstruos
 
-    ```bash
-    cd client
-    npm install
-    ```
+Si la base de datos está vacía, con el backend y MongoDB iniciados puedes enviar una petición **POST** a `http://localhost:3000/api/monsters/seed` para cargar los datos de `monsters.json`. Hazlo una sola vez en local: repetirla puede crear duplicados. **No expongas el endpoint de carga de datos en una API pública sin protegerlo.**
 
-    Configurar las variables de entorno en el archivo `.env`:
+## API existente
 
-    ```env
-    VITE_API_URL=http://localhost:3000/api
-    ```
+- `GET /api/monsters`: devuelve monstruos.
+- `POST /api/monsters`: crea un monstruo.
+- `PUT /api/monsters`: edita un monstruo.
+- `DELETE /api/monsters`: elimina un monstruo.
 
-4. **Iniciar la Aplicación:**
+Las operaciones de creación, edición y eliminación pertenecen al backend; no hay formularios de administración en el frontend actual.
 
-    - Iniciar el backend:
+## Próximos pasos
 
-        ```bash
-        npm run server
-        ```
+- [ ] Probar React, Express y MongoDB juntos.
+- [ ] Sustituir los botones de biomas por un mapa visual interactivo.
+- [ ] Añadir imágenes y mejorar la presentación de las fichas.
+- [ ] Comprobar diseño y navegación en móvil.
 
-    - Iniciar el frontend:
-
-        ```bash
-        cd client
-        npm run dev
-        ```
-
-    La aplicación estará disponible en `http://localhost:5173` (frontend Vite); el backend escucha en `http://localhost:3000`.
-
-## Funcionalidades Principales
-
-1. **Filtrado por Bioma:**
-   - Los usuarios pueden ver una lista de biomas y filtrar los monstruos según su hábitat.
-
-2. **Creación de Monstruos:**
-   - A través de un formulario, los usuarios pueden agregar nuevos monstruos al sistema, especificando detalles como nombre, tipo, y bioma.
-
-3. **Edición y Actualización:**
-   - La aplicación permite a los usuarios editar y actualizar la información de los monstruos existentes.
-
-4. **Eliminación de Monstruos:**
-   - Se proporciona una función para eliminar monstruos de la base de datos.
-\n**Nota:** crear, editar y eliminar monstruos se plantearon inicialmente desde el backend.
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Si desea mejorar esta aplicación, abra un problema o envíe una solicitud de extracción.
-
-## Licencia
-
-El archivo `package.json` indica licencia ISC. Comprueba las condiciones de reutilización antes de distribuir el proyecto.
+Proyecto educativo no oficial, sin relación con Capcom.
