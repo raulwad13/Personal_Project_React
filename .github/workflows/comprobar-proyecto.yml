@@ -1,0 +1,21 @@
+name: Comprobar Monster Hunter Maps
+on:
+  push:
+  pull_request:
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Instalar frontend
+        run: npm install --prefix client
+      - name: Compilar frontend
+        run: npm run build --prefix client
+      - name: Comprobar sintaxis del backend
+        run: |
+          node --check index.js
+          node --check controllers/monster_controller.js
+          node --check routes/monster_routes.js
