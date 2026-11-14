@@ -75,6 +75,12 @@ VITE_API_URL=http://localhost:3000/api
 
 Si quieres guardar los monstruos en MongoDB, con el backend y MongoDB iniciados puedes enviar una petición **POST** a `http://localhost:3000/api/monsters/seed` para cargar los datos de `monsters.json`. Hazlo una sola vez en local: si la colección ya contiene monstruos, la API devuelve un error `409` para evitar duplicados. La ruta está desactivada cuando `NODE_ENV=production`.
 
+## Pruebas automáticas
+
+Desde la raíz del proyecto, ejecuta `npm ci` y después `npm test`. La prueba inicia Express sin MongoDB y comprueba el catálogo de respaldo, el bloqueo de modificaciones en producción y la respuesta 404. GitHub Actions ejecuta estas pruebas y compila el frontend en cada actualización.
+
+**Seguridad:** en producción las rutas de usuarios y favoritos están desactivadas hasta incorporar autenticación. En desarrollo necesitan MongoDB. No se han realizado pruebas de integración con una instancia real de MongoDB.
+
 ## API existente
 
 - `GET /api/monsters`: devuelve monstruos.
