@@ -16,6 +16,19 @@ function FotoMonstruo({ nombre, grande = false }) {
   );
 }
 
+
+// Mapas ya incluidos en el proyecto: el resto de regiones usa el mapa general.
+const mapas = import.meta.glob("./assets/maps/*.{png,PNG,jpg,jpeg,webp}", { eager: true, query: "?url", import: "default" });
+const mapaPorArchivo = Object.fromEntries(Object.entries(mapas).map(([ruta, url]) => [ruta.split("/").pop().toLowerCase(), url]));
+const mapasBioma = {
+  "Ancient Forest": "bosque-primigenio.png",
+  "Wildspire Waste": "yermo-de-agujas.png",
+  "Rotten Vale": "valle-putrefacto.png",
+  "Elder's Recess": "lecho-de-ancianos.png",
+};
+const mapaGeneral = mapaPorArchivo["mapaglobal.png"];
+const imagenBioma = (nombre) => mapaPorArchivo[mapasBioma[nombre]] || mapaGeneral;
+
 // Los biomas se obtienen de los monstruos recibidos de la API.
 const API = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? null : `${window.location.protocol}//${window.location.hostname}:3000/api`);
 
@@ -82,11 +95,13 @@ function App() {
             {cargando && <p role="status">Cargando biomas y monstruos...</p>}
             {error && <p role="alert">{error}</p>}
             {!cargando && !error && biomas.length === 0 && <p>No hay monstruos disponibles. Comprueba los datos de la API.</p>}
+            <p className="mapa-ayuda">Elige una región para descubrir qué monstruos viven allí.</p>
             <div className="mapa" aria-label="Seleccionar bioma">
               {biomas.map((nombre) => (
                 <button key={nombre} className={bioma === nombre ? "bioma activo" : "bioma"}
                   onClick={() => { setBioma(nombre); setBusqueda(""); }} aria-pressed={bioma === nombre}>
-                  {nombre}
+                  {imagenBioma(nombre) && <img className="bioma-imagen" src={imagenBioma(nombre)} alt="" loading="lazy" />}
+                  <span className="bioma-info"><strong>{nombre}</strong><small>{monstruos.filter((m) => m.locations?.some((l) => l.name === nombre)).length} monstruos</small></span>
                 </button>
               ))}
             </div>
@@ -94,6 +109,7 @@ function App() {
           {bioma && (
             <section className="panel">
               <h2>Monstruos de {bioma}</h2>
+              {imagenBioma(bioma) && <img className="mapa-seleccionado" src={imagenBioma(bioma)} alt={`Mapa ilustrado de ${bioma}`} /> }
               {!cargando && !error && disponibles.length === 0 && <p>No hay monstruos disponibles en este bioma.</p>}
               <label className="etiqueta-busqueda" htmlFor="buscar-monstruo">Buscar monstruo</label>
               <input id="buscar-monstruo" className="buscador" type="search"
