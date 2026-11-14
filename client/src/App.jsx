@@ -1,6 +1,21 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+// Vite incluye las imágenes del repositorio en la compilación de GitHub Pages.
+const imagenes = import.meta.glob("./assets/monsters/*.{webp,png,jpg,jpeg}", { eager: true, query: "?url", import: "default" });
+const normalizar = (nombre) => nombre.toLowerCase().replace(/[^a-z0-9]/g, "");
+const fotos = Object.fromEntries(Object.entries(imagenes).map(([ruta, url]) => [normalizar(ruta.split("/").pop().replace(/\.[^.]+$/, "")), url]));
+const fotoMonstruo = (nombre) => fotos[normalizar(nombre)] || null;
+
+function FotoMonstruo({ nombre, grande = false }) {
+  const src = fotoMonstruo(nombre);
+  return src ? (
+    <img className={grande ? "foto-monstruo foto-grande" : "foto-monstruo"} src={src} alt={`Imagen de ${nombre}`} loading="lazy" />
+  ) : (
+    <div className={grande ? "foto-faltante foto-grande" : "foto-faltante"} aria-label={`Imagen no disponible de ${nombre}`}>🐉</div>
+  );
+}
+
 // Los biomas se obtienen de los monstruos recibidos de la API.
 const API = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? null : `${window.location.protocol}//${window.location.hostname}:3000/api`);
 
@@ -51,6 +66,7 @@ function App() {
         <section className="panel">
           <button onClick={() => setSeleccionado(null)}>← Volver a {bioma}</button>
           <h2>{seleccionado.name}</h2>
+          <FotoMonstruo nombre={seleccionado.name} grande />
           <p><strong>Especie:</strong> {seleccionado.species || "Desconocida"}</p>
           <p><strong>Tipo:</strong> {seleccionado.type || "Desconocido"}</p>
           <p>{seleccionado.description || "Sin descripción disponible."}</p>
@@ -87,6 +103,7 @@ function App() {
               <div className="monstruos">
                 {filtrados.map((monstruo) => (
                   <button key={monstruo.name} className="monstruo" onClick={() => setSeleccionado(monstruo)}>
+                    <FotoMonstruo nombre={monstruo.name} />
                     <strong>{monstruo.name}</strong>
                     <span>{monstruo.species}</span>
                     <small>Ver ficha →</small>
