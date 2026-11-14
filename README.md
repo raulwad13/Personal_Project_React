@@ -5,7 +5,7 @@ Proyecto fullstack de exploración de biomas y consulta de monstruos de Monster 
 ## Cómo funciona
 
 1. Selecciona un bioma en el mapa de botones.
-2. Consulta los monstruos que viven allí.
+2. Consulta los monstruos que viven allí y utiliza el buscador para filtrarlos por nombre.
 3. Pulsa sobre un monstruo para ver su ficha: especie, tipo, descripción, hábitats y debilidades.
 4. Vuelve al bioma para seguir explorando.
 
