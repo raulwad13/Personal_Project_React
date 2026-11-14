@@ -1,30 +1,22 @@
 const monsterController = require("../controllers/monster_controller");
 const monsterRouter = require("express").Router();
 
-// POST
-monsterRouter.post("/", monsterController.createMonster);
-
-// La carga inicial solo está disponible en desarrollo local.
-monsterRouter.post("/seed", (req, res, next) => {
+// La enciclopedia pública es de solo lectura.
+// Las rutas de edición se reservan para desarrollo; no hay autenticación todavía.
+const soloDesarrollo = (req, res, next) => {
   if (process.env.NODE_ENV === "production") {
-    return res.status(403).json({ message: "Seed disabled in production" });
+    return res.status(403).json({ message: "Edición desactivada en producción." });
   }
   next();
-}, monsterController.createMonsters);
+};
 
-
-// GET
+// Consultar monstruos no requiere modificar la base de datos.
 monsterRouter.get("/", monsterController.getMonster);
 
-// PUT
-monsterRouter.put("/", monsterController.editMonster);
-
-// DELETE
-monsterRouter.delete("/", monsterController.deleteMonster);
-
-// No exponemos un endpoint para borrar toda la colección.
-
-
-
+// Herramientas de administración disponibles solo fuera de producción.
+monsterRouter.post("/", soloDesarrollo, monsterController.createMonster);
+monsterRouter.post("/seed", soloDesarrollo, monsterController.createMonsters);
+monsterRouter.put("/", soloDesarrollo, monsterController.editMonster);
+monsterRouter.delete("/", soloDesarrollo, monsterController.deleteMonster);
 
 module.exports = monsterRouter;
