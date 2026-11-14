@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 // Los biomas se obtienen de los monstruos recibidos de la API.
-const API = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const API = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:3000/api`;
 
 function App() {
   const [monstruos, setMonstruos] = useState([]);
@@ -18,7 +18,7 @@ function App() {
         return respuesta.json();
       })
       .then((datos) => setMonstruos(Array.isArray(datos) ? datos : []))
-      .catch(() => setError("No se ha podido conectar con la API. Comprueba que Express y MongoDB están funcionando."))
+      .catch(() => setError("No se ha podido conectar con la API. Comprueba que el servidor Express está funcionando."))
       .finally(() => setCargando(false));
   }, []);
 
@@ -58,7 +58,7 @@ function App() {
             <h2>Mapa de biomas</h2>
             {cargando && <p role="status">Cargando biomas y monstruos...</p>}
             {error && <p role="alert">{error}</p>}
-            {!cargando && !error && biomas.length === 0 && <p>No hay datos. Comprueba que has cargado los monstruos en MongoDB.</p>}
+            {!cargando && !error && biomas.length === 0 && <p>No hay monstruos disponibles. Comprueba los datos de la API.</p>}
             <div className="mapa" aria-label="Seleccionar bioma">
               {biomas.map((nombre) => (
                 <button key={nombre} className={bioma === nombre ? "bioma activo" : "bioma"}
