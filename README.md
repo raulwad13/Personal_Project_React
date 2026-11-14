@@ -6,6 +6,17 @@
 
 Proyecto fullstack de exploración de biomas y consulta de monstruos de Monster Hunter, desarrollado como trabajo final de bootcamp.
 
+## Vista previa
+
+Las siguientes imágenes proceden de los recursos incluidos en el proyecto. Son **ilustraciones originales del repositorio**, no capturas de pantalla de la aplicación.
+
+| Exploración de regiones | Ficha de monstruo |
+|:--:|:--:|
+| ![Mapa de Ancient Forest](client/src/assets/maps/bosque-primigenio.PNG) | ![Rathalos](client/src/assets/monsters/Rathalos.webp) |
+| Selecciona un bioma y consulta sus monstruos. | Abre una ficha con imagen, hábitats y debilidades. |
+
+**[▶ Probar la demo interactiva](https://raulwad13.github.io/Personal_Project_React/)** · Funciona desde el navegador del móvil.
+
 ## Cómo funciona
 
 1. Selecciona un bioma en la galería de mapas ilustrados.
