@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-// Cada botón representa un bioma del mapa original.
-const biomas = ["Ancient Forest", "Wildspire Waste", "Coral Highlands", "Rotten Vale", "Elder's Recess"];
+// Los biomas se obtienen de los monstruos recibidos de la API.
 const API = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 function App() {
@@ -22,6 +21,12 @@ function App() {
       .catch(() => setError("No se ha podido conectar con la API. Comprueba que Express y MongoDB están funcionando."))
       .finally(() => setCargando(false));
   }, []);
+
+  const biomas = [...new Set(monstruos.flatMap((monstruo) =>
+    Array.isArray(monstruo.locations)
+      ? monstruo.locations.map((lugar) => lugar.name).filter(Boolean)
+      : []
+  ))].sort();
 
   const disponibles = monstruos.filter((monstruo) =>
     Array.isArray(monstruo.locations) &&
@@ -51,6 +56,9 @@ function App() {
         <>
           <section className="panel">
             <h2>Mapa de biomas</h2>
+            {cargando && <p role="status">Cargando biomas y monstruos...</p>}
+            {error && <p role="alert">{error}</p>}
+            {!cargando && !error && biomas.length === 0 && <p>No hay datos. Comprueba que has cargado los monstruos en MongoDB.</p>}
             <div className="mapa" aria-label="Seleccionar bioma">
               {biomas.map((nombre) => (
                 <button key={nombre} className={bioma === nombre ? "bioma activo" : "bioma"}
@@ -63,8 +71,6 @@ function App() {
           {bioma && (
             <section className="panel">
               <h2>Monstruos de {bioma}</h2>
-              {cargando && <p>Cargando monstruos...</p>}
-              {error && <p role="alert">{error}</p>}
               {!cargando && !error && disponibles.length === 0 && <p>No hay monstruos disponibles en este bioma.</p>}
               <div className="monstruos">
                 {disponibles.map((monstruo) => (
