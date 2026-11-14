@@ -1,5 +1,6 @@
 const UserModel = require("../models/users_model");
-const userSeed = require("../users.json");
+// El archivo users.json no se distribuye: nunca cargar usuarios de ejemplo inexistentes.
+const userSeed = [];
 
 // CREATE
 const createUser = async (req, res) => {
