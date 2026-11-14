@@ -31,8 +31,13 @@ const createMonsters = async (req, res) => {
 
 const getMonster = async (req, res) => {
   try {
-    const monster = await MonsterModel.find({}).select("-_id -__v");
-    res.status(200).json(monster);
+    // La enciclopedia puede mostrarse incluso sin MongoDB.
+    // Cuando hay conexión, usamos los datos guardados; si no, los del JSON.
+    if (MonsterModel.db.readyState !== 1) {
+      return res.status(200).json(monsterSeed);
+    }
+    const monster = await MonsterModel.find({}).select("-_id -__v").lean();
+    res.status(200).json(monster.length ? monster : monsterSeed);
   } catch (error) {
     console.log(`ERROR: ${error.stack}`);
     res.status(400).json({ msj: `ERROR: ${error.stack}` });
