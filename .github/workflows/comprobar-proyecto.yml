@@ -22,4 +22,4 @@ jobs:
       - name: Instalar dependencias del backend
         run: npm ci
       - name: Probar API sin MongoDB
-        run: node tests/api-smoke.cjs
+        run: npm test
