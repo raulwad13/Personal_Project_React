@@ -19,3 +19,7 @@ jobs:
           node --check index.js
           node --check controllers/monster_controller.js
           node --check routes/monster_routes.js
+      - name: Instalar dependencias del backend
+        run: npm ci
+      - name: Probar API sin MongoDB
+        run: node tests/api-smoke.cjs
