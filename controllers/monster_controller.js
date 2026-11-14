@@ -15,9 +15,13 @@ const createMonster = async (req, res) => {
 
 const createMonsters = async (req, res) => {
   try {
-    const monsters = await MonsterModel.create(monsterSeed);
-
-    res.status(201).json({ message: "the monster born", monsters });
+    // Evita duplicar la colección al pulsar dos veces el botón de carga.
+    const existing = await MonsterModel.countDocuments();
+    if (existing > 0) {
+      return res.status(409).json({ message: "Ya hay monstruos en la base de datos." });
+    }
+    const monsters = await MonsterModel.insertMany(monsterSeed);
+    res.status(201).json({ message: "Monstruos cargados", total: monsters.length });
   } catch (error) {
     console.log(`ERROR: ${error.stack}`);
     res.status(400).json({ msj: `ERROR: ${error.stack}` });
