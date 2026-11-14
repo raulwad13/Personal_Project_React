@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 // Vite incluye las imágenes del repositorio en la compilación de GitHub Pages.
@@ -62,6 +62,12 @@ function App() {
   const [busqueda, setBusqueda] = useState("");
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(true);
+  const seccionMonstruos = useRef(null);
+  const seccionFicha = useRef(null);
+  const irA = (referencia) => window.requestAnimationFrame(() => referencia.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  const elegirBioma = (nombre) => { setBioma(nombre); setBusqueda(""); irA(seccionMonstruos); };
+  const abrirFicha = (monstruo) => { setSeleccionado(monstruo); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const volver = () => { setSeleccionado(null); irA(seccionMonstruos); };
 
   useEffect(() => {
     fetch(API ? API + "/monsters" : import.meta.env.BASE_URL + "monsters.json")
@@ -122,7 +128,7 @@ function App() {
             <div className="mapa" aria-label="Seleccionar bioma">
               {biomas.map((nombre) => (
                 <button key={nombre} className={bioma === nombre ? "bioma activo" : "bioma"}
-                  onClick={() => { setBioma(nombre); setBusqueda(""); }} aria-pressed={bioma === nombre}>
+                  onClick={() => elegirBioma(nombre)} aria-pressed={bioma === nombre}>
                   {imagenBioma(nombre) && <img className="bioma-imagen" src={imagenBioma(nombre)} alt="" loading="lazy" />}
                   <span className="bioma-info"><strong>{nombre}</strong><small>{monstruos.filter((m) => m.locations?.some((l) => l.name === nombre)).length} monstruos</small></span>
                 </button>
@@ -141,7 +147,7 @@ function App() {
               {filtrados.length === 0 && disponibles.length > 0 && <p>No hay monstruos que coincidan con la búsqueda.</p>}
               <div className="monstruos">
                 {filtrados.map((monstruo) => (
-                  <button key={monstruo.name} className="monstruo" onClick={() => setSeleccionado(monstruo)}>
+                  <button key={monstruo.name} className="monstruo" onClick={() => abrirFicha(monstruo)}>
                     <FotoMonstruo nombre={monstruo.name} />
                     <strong>{monstruo.name}</strong>
                     <span>{monstruo.species}</span>
