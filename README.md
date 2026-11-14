@@ -19,7 +19,7 @@ Proyecto fullstack de exploración de biomas y consulta de monstruos de Monster 
 
 ## Ejecutar en local
 
-Requisitos: Node.js, npm y MongoDB en funcionamiento.
+Requisitos: Node.js y npm. MongoDB es **opcional para consultar las fichas**: si no está conectado o la colección está vacía, la API muestra los monstruos incluidos en `monsters.json`. Para crear, editar o eliminar monstruos sí necesitas MongoDB.
 
 ```bash
 git clone https://github.com/raulwad13/Personal_Project_React.git
@@ -58,7 +58,7 @@ VITE_API_URL=http://localhost:3000/api
 
 ### Cargar los monstruos
 
-Si la base de datos está vacía, con el backend y MongoDB iniciados puedes enviar una petición **POST** a `http://localhost:3000/api/monsters/seed` para cargar los datos de `monsters.json`. Hazlo una sola vez en local: repetirla puede crear duplicados. **No expongas el endpoint de carga de datos en una API pública sin protegerlo.**
+Si quieres guardar los monstruos en MongoDB, con el backend y MongoDB iniciados puedes enviar una petición **POST** a `http://localhost:3000/api/monsters/seed` para cargar los datos de `monsters.json`. Hazlo una sola vez en local: repetirla puede crear duplicados. **No expongas el endpoint de carga de datos en una API pública sin protegerlo.**
 
 ## API existente
 
@@ -71,7 +71,7 @@ Las operaciones de creación, edición y eliminación pertenecen al backend; no 
 
 ## Próximos pasos
 
-- [ ] Probar React, Express y MongoDB juntos.
+- [ ] Probar React y Express juntos, tanto con MongoDB como sin él.
 - [ ] Sustituir los botones de biomas por un mapa visual interactivo.
 - [ ] Añadir imágenes y mejorar la presentación de las fichas.
 - [ ] Comprobar diseño y navegación en móvil.
