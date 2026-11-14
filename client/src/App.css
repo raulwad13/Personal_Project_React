@@ -41,3 +41,13 @@
 .debilidad-detalle small{color:#536753;overflow-wrap:anywhere}
 .estrellas{font-size:1.25rem;letter-spacing:1px;color:#a56b13;white-space:nowrap}
 @media(max-width:600px){.debilidades{grid-template-columns:1fr}.debilidad{padding:10px}.estrellas{font-size:1.2rem}}
+
+/* Navegación accesible para pantallas pequeñas. */
+.encabezado-region{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.encabezado-region h2{margin:0}
+.volver-mapa{min-height:44px;padding:10px 14px;border:1px solid #8fa68d;border-radius:10px;background:#e9f1e6;color:#23402c;font-weight:700}
+.volver-mapa:hover{background:#d9e9d5}
+.volver-mapa:focus-visible{outline:3px solid #d59b35;outline-offset:3px}
+.panel{scroll-margin-top:12px}
+@media(max-width:600px){.encabezado-region{align-items:stretch;flex-direction:column}.volver-mapa,.volver-ficha{justify-content:center;width:100%}.bioma,.monstruo{touch-action:manipulation}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
