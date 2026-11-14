@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 // Los biomas se obtienen de los monstruos recibidos de la API.
-const API = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:3000/api`;
+const API = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? null : `${window.location.protocol}//${window.location.hostname}:3000/api`);
 
 function App() {
   const [monstruos, setMonstruos] = useState([]);
@@ -13,13 +13,13 @@ function App() {
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    fetch(API + "/monsters")
+    fetch(API ? API + "/monsters" : import.meta.env.BASE_URL + "monsters.json")
       .then((respuesta) => {
         if (!respuesta.ok) throw new Error("No se pudieron cargar los monstruos");
         return respuesta.json();
       })
       .then((datos) => setMonstruos(Array.isArray(datos) ? datos : []))
-      .catch(() => setError("No se ha podido conectar con la API. Comprueba que el servidor Express está funcionando."))
+      .catch(() => setError("No se pudieron cargar los datos de monstruos. Recarga la página o comprueba la conexión."))
       .finally(() => setCargando(false));
   }, []);
 
@@ -44,6 +44,7 @@ function App() {
       <header className="cabecera">
         <h1>Monster Hunter Maps</h1>
         <p>Selecciona una región y descubre sus monstruos.</p>
+        {!API && <p className="demo-notice">Demo pública · 58 monstruos · Consulta sin servidor</p>}
       </header>
 
       {seleccionado ? (
