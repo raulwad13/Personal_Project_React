@@ -29,6 +29,29 @@ const mapasBioma = {
 const mapaGeneral = mapaPorArchivo["mapaglobal.png"];
 const imagenBioma = (nombre) => mapaPorArchivo[mapasBioma[nombre]] || mapaGeneral;
 
+
+const elementos = {
+  fire: ["🔥", "Fuego"], water: ["💧", "Agua"], thunder: ["⚡", "Rayo"],
+  ice: ["❄️", "Hielo"], dragon: ["🐉", "Dragón"], poison: ["☠️", "Veneno"],
+  blast: ["💥", "Explosión"], paralysis: ["⚡", "Parálisis"], sleep: ["🌙", "Sueño"],
+};
+const nombreElemento = (valor) => elementos[String(valor || "").toLowerCase()] || ["✦", valor || "Desconocido"];
+
+function Debilidades({ datos }) {
+  if (!Array.isArray(datos) || datos.length === 0) return <p>No hay debilidades registradas.</p>;
+  return <div className="debilidades">{datos.map((dato, indice) => {
+    const [icono, nombre] = nombreElemento(dato.element);
+    const estrellas = Number(dato.stars);
+    return <div className="debilidad" key={`${dato.element}-${indice}`}>
+      <span className="elemento-icono" aria-hidden="true">{icono}</span>
+      <span className="debilidad-detalle"><strong>{nombre}</strong>{dato.condition && <small>{dato.condition}</small>}</span>
+      <span className="estrellas" aria-label={Number.isFinite(estrellas) && estrellas >= 0 ? `${estrellas} de 3 estrellas` : "Valoración no disponible"}>
+        {Number.isFinite(estrellas) && estrellas >= 0 ? `${"★".repeat(Math.min(3, estrellas))}${"☆".repeat(Math.max(0, 3 - estrellas))}` : "—"}
+      </span>
+    </div>;
+  })}</div>;
+}
+
 // Los biomas se obtienen de los monstruos recibidos de la API.
 const API = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? null : `${window.location.protocol}//${window.location.hostname}:3000/api`);
 
@@ -77,7 +100,7 @@ function App() {
 
       {seleccionado ? (
         <section className="panel">
-          <button onClick={() => setSeleccionado(null)}>← Volver a {bioma}</button>
+          <button className="volver-ficha" onClick={() => setSeleccionado(null)}>← Volver a {bioma || "los biomas"}</button>
           <h2>{seleccionado.name}</h2>
           <FotoMonstruo nombre={seleccionado.name} grande />
           <p><strong>Especie:</strong> {seleccionado.species || "Desconocida"}</p>
@@ -86,7 +109,7 @@ function App() {
           <h3>Hábitats</h3>
           <p>{seleccionado.locations?.map((lugar) => lugar.name).join(", ") || "Sin datos"}</p>
           <h3>Debilidades</h3>
-          <p>{seleccionado.weaknesses?.map((debilidad) => debilidad.element).join(", ") || "Sin datos"}</p>
+          <Debilidades datos={seleccionado.weaknesses} />
         </section>
       ) : (
         <>
