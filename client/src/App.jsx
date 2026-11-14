@@ -8,6 +8,7 @@ function App() {
   const [monstruos, setMonstruos] = useState([]);
   const [bioma, setBioma] = useState(null);
   const [seleccionado, setSeleccionado] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(true);
 
@@ -31,6 +32,11 @@ function App() {
   const disponibles = monstruos.filter((monstruo) =>
     Array.isArray(monstruo.locations) &&
     monstruo.locations.some((lugar) => lugar.name === bioma)
+  );
+
+  // Filtramos solo los monstruos del bioma seleccionado.
+  const filtrados = disponibles.filter((monstruo) =>
+    monstruo.name.toLowerCase().includes(busqueda.trim().toLowerCase())
   );
 
   return (
@@ -62,7 +68,7 @@ function App() {
             <div className="mapa" aria-label="Seleccionar bioma">
               {biomas.map((nombre) => (
                 <button key={nombre} className={bioma === nombre ? "bioma activo" : "bioma"}
-                  onClick={() => setBioma(nombre)} aria-pressed={bioma === nombre}>
+                  onClick={() => { setBioma(nombre); setBusqueda(""); }} aria-pressed={bioma === nombre}>
                   {nombre}
                 </button>
               ))}
@@ -72,8 +78,13 @@ function App() {
             <section className="panel">
               <h2>Monstruos de {bioma}</h2>
               {!cargando && !error && disponibles.length === 0 && <p>No hay monstruos disponibles en este bioma.</p>}
+              <label className="etiqueta-busqueda" htmlFor="buscar-monstruo">Buscar monstruo</label>
+              <input id="buscar-monstruo" className="buscador" type="search"
+                placeholder="Escribe el nombre de un monstruo..."
+                value={busqueda} onChange={(evento) => setBusqueda(evento.target.value)} />
+              {filtrados.length === 0 && disponibles.length > 0 && <p>No hay monstruos que coincidan con la búsqueda.</p>}
               <div className="monstruos">
-                {disponibles.map((monstruo) => (
+                {filtrados.map((monstruo) => (
                   <button key={monstruo.name} className="monstruo" onClick={() => setSeleccionado(monstruo)}>
                     <strong>{monstruo.name}</strong>
                     <span>{monstruo.species}</span>
