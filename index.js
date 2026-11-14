@@ -43,7 +43,7 @@ app.use(express.json());
 
 
 //USERS
-app.use("/api/users", userRoutes)
+app.use("/api/users", (req, res, next) => process.env.NODE_ENV === "production" ? res.status(403).json({ message: "Usuarios desactivados en producción." }) : next(), userRoutes)
 
 
 //MONSTERS
@@ -51,7 +51,7 @@ app.use("/api/monsters",monsterRoutes)
 
 
 //FAVORITES
-app.use("/api/favs",favRoutes)
+app.use("/api/favs", (req, res, next) => process.env.NODE_ENV === "production" ? res.status(403).json({ message: "Favoritos desactivados en producción." }) : next(), favRoutes)
 
 
 
