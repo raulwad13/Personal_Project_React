@@ -6,7 +6,7 @@
   "scripts": {
     "client": "npm run dev --prefix client",
     "server": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node tests/api-smoke.cjs",
     "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
     "start": "node index.js"
   },
